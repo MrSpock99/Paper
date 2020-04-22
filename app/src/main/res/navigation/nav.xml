@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/restaurantListFragment">
+    <fragment
+        android:id="@+id/restaurantListFragment"
+        android:name="itis.ru.paper.ui.restaurant_list.RestaurantListFragment"
+        android:label="RestaurantListFragment" >
+        <action
+            android:id="@+id/action_restaurantListFragment_to_restarauntMenuFragment"
+            app:destination="@id/restarauntMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restarauntMenuFragment"
+        android:name="itis.ru.paper.ui.restaurant_menu.RestarauntMenuFragment"
+        android:label="RestarauntMenuFragment" >
+        <argument
+            android:name="rest_name"
+            app:argType="string" />
+        <argument
+            android:name="menu"
+            app:argType="itis.ru.paper.model.Dish[]" />
+        <argument
+            android:name="rest_photo"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="itis.ru.paper.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_restaurantListFragment"
+            app:destination="@id/restaurantListFragment" />
+    </fragment>
+</navigation>
