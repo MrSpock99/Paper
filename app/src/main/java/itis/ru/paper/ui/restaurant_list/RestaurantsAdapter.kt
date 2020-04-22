@@ -36,6 +36,7 @@ class RestaurantsAdapter(private val clickListener: (Restaurant) -> (Unit)) :
                 clickListener(item)
             }
             itemView.tv_restaurant_name.text = item.name
+            itemView.tv_description.text = item.description
             Glide.with(itemView)
                 .load(item.photo)
                 .into(itemView.iv_restaurant_photo)

@@ -11,7 +11,7 @@ class RestaurantInteractor(private val repository: RestaurantRepository) {
             .subscribeOn(Schedulers.io())
             .flatMap {
                 Observable.fromIterable(it)
-                    .map { Restaurant(it.name, it.menu, it.photoUrl) }
+                    .map { Restaurant(it.name, it.menu, it.photoUrl, it.description) }
                     .toList()
                     .toObservable()
             }
