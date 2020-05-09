@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_restaurant_about.*
 
 class AboutRestarauntFragment : BaseFragment() {
     val args: AboutRestarauntFragmentArgs by navArgs()
-    private lateinit var dishesAdapter: DishesAdapter
     private lateinit var interiorAdapter: InteriorAdapter
     private lateinit var menuCategoryAdapter: MenuCategoryAdapter
 
@@ -48,7 +47,12 @@ class AboutRestarauntFragment : BaseFragment() {
 
     private fun initMenuCategoryAdapter() {
         menuCategoryAdapter = MenuCategoryAdapter {
-
+            val action =
+                AboutRestarauntFragmentDirections.actionRestarauntMenuFragmentToMenuCategoryFragment(
+                    dishes = it.dishes.toTypedArray(),
+                    name = it.name
+                )
+            rootActivity.navController.navigate(action)
         }
         rv_menu_category.layoutManager = LinearLayoutManager(context)
         rv_menu_category.adapter = menuCategoryAdapter

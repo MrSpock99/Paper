@@ -34,6 +34,9 @@
         <argument
             android:name="interior_photos"
             app:argType="string[]" />
+        <action
+            android:id="@+id/action_restarauntMenuFragment_to_menuCategoryFragment"
+            app:destination="@id/menuCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -43,5 +46,16 @@
         <action
             android:id="@+id/action_loginFragment_to_restaurantListFragment"
             app:destination="@id/restaurantListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuCategoryFragment"
+        android:name="itis.ru.paper.ui.restaurant_menu.MenuCategoryFragment"
+        android:label="MenuCategoryFragment" >
+        <argument
+            android:name="dishes"
+            app:argType="itis.ru.paper.model.Dish[]" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
 </navigation>
