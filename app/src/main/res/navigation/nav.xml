@@ -14,17 +14,26 @@
     </fragment>
     <fragment
         android:id="@+id/restarauntMenuFragment"
-        android:name="itis.ru.paper.ui.restaurant_menu.RestarauntMenuFragment"
+        android:name="itis.ru.paper.ui.restaurant_menu.AboutRestarauntFragment"
         android:label="RestarauntMenuFragment" >
         <argument
             android:name="rest_name"
             app:argType="string" />
         <argument
             android:name="menu"
-            app:argType="itis.ru.paper.model.Dish[]" />
+            app:argType="itis.ru.paper.model.LocalMenuCategory[]" />
         <argument
             android:name="rest_photo"
             app:argType="string" />
+        <argument
+            android:name="working_hours"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+        <argument
+            android:name="interior_photos"
+            app:argType="string[]" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"

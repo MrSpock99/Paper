@@ -8,17 +8,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import itis.ru.paper.R
-import itis.ru.paper.model.Dish
 import kotlinx.android.synthetic.main.item_dish.view.*
+import kotlinx.android.synthetic.main.item_restaurant_photo.view.*
 
-class DishesAdapter(private val clickListener: (Dish) -> Unit) :
-    ListAdapter<Dish, DishesAdapter.Holder>(DiffCallback()) {
+class InteriorAdapter(private val clickListener: (String) -> Unit) :
+    ListAdapter<String, InteriorAdapter.Holder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = LayoutInflater.from(parent.context)
         return Holder(
             inflater.inflate(
-                R.layout.item_dish,
+                R.layout.item_restaurant_photo,
                 parent,
                 false
             )
@@ -31,24 +31,21 @@ class DishesAdapter(private val clickListener: (Dish) -> Unit) :
 
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(item: Dish, clickListener: (Dish) -> Unit) {
-            Glide.with(itemView).load(item.photoUrl).into(itemView.iv_dish_photo)
-            itemView.tv_dish_name.text = item.name
+        fun bind(url: String, clickListener: (String) -> Unit) {
+            Glide.with(itemView).load(url).into(itemView.iv_restaurant_photo)
             itemView.setOnClickListener {
-                clickListener(item)
+                clickListener(url)
             }
         }
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<Dish>() {
-        override fun areItemsTheSame(oldItem: Dish, newItem: Dish): Boolean {
+    class DiffCallback : DiffUtil.ItemCallback<String>() {
+        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Dish, newItem: Dish): Boolean {
+        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
             return oldItem == newItem
         }
     }
-
-
 }

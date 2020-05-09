@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import itis.ru.paper.*
+import itis.ru.paper.R
 import itis.ru.paper.ui.base.BaseFragment
 import itis.ru.paper.ui.main.MainActivity
 import kotlinx.android.synthetic.main.fragment_restaurant_list.*
@@ -21,6 +21,7 @@ class RestaurantListFragment : BaseFragment() {
     private val viewModel: RestaurantListViewModel by lazy {
         ViewModelProviders.of(this, viewModeFactory).get(RestaurantListViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,21 +37,24 @@ class RestaurantListFragment : BaseFragment() {
         viewModel.getRestaurantsList()
     }
 
-    private fun observeRestaurantList(){
+    private fun observeRestaurantList() {
         viewModel.restaurantListLiveData.observe(this, Observer {
-            if (it.data != null){
+            if (it.data != null) {
                 adapter.swapData(it.data)
             }
         })
     }
 
     private fun initRecycler() {
-       adapter = RestaurantsAdapter {
+        adapter = RestaurantsAdapter {
             val action =
                 RestaurantListFragmentDirections.actionRestaurantListFragmentToRestarauntMenuFragment(
-                    it.name,
-                    it.menu.toTypedArray(),
-                    it.photo
+                    restName = it.name,
+                    menu = it.menu.toTypedArray(),
+                    restPhoto = it.photo,
+                    interiorPhotos = it.interiorPhotos.toTypedArray(),
+                    address = it.address,
+                    workingHours = it.workingHours
                 )
             (activity as MainActivity).navController.navigate(action)
         }
