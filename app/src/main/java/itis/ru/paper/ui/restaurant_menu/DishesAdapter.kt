@@ -34,6 +34,7 @@ class DishesAdapter(private val clickListener: (Dish) -> Unit) :
         fun bind(item: Dish, clickListener: (Dish) -> Unit) {
             Glide.with(itemView).load(item.photoUrl).into(itemView.iv_dish_photo)
             itemView.tv_dish_name.text = item.name
+            itemView.tv_cost.text = item.cost
             itemView.setOnClickListener {
                 clickListener(item)
             }
