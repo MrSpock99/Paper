@@ -41,6 +41,7 @@ class RestaurantListFragment : BaseFragment() {
         viewModel.restaurantListLiveData.observe(this, Observer {
             if (it.data != null) {
                 adapter.swapData(it.data)
+                pb_downloading.visibility = View.GONE
             }
         })
     }
@@ -54,7 +55,8 @@ class RestaurantListFragment : BaseFragment() {
                     restPhoto = it.photo,
                     interiorPhotos = it.interiorPhotos.toTypedArray(),
                     address = it.address,
-                    workingHours = it.workingHours
+                    workingHours = it.workingHours,
+                    phone = it.phone
                 )
             (activity as MainActivity).navController.navigate(action)
         }

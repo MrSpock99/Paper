@@ -3,12 +3,12 @@ package itis.ru.paper.ui.restaurant_list
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import itis.ru.paper.interactor.RestaurantInteractor
-import itis.ru.paper.model.Restaurant
+import itis.ru.paper.model.LocalRestaurant
 import itis.ru.paper.ui.base.BaseViewModel
 import itis.ru.paper.utils.Response
 
 class RestaurantListViewModel(private val interactor: RestaurantInteractor) : BaseViewModel() {
-    val restaurantListLiveData = MutableLiveData<Response<MutableList<Restaurant>>>()
+    val restaurantListLiveData = MutableLiveData<Response<MutableList<LocalRestaurant>>>()
 
     fun getRestaurantsList() {
         disposables.add(

@@ -17,7 +17,8 @@ data class RemoteRestaurant(
     var workingHours: String,
     @get:PropertyName("address")
     @set:PropertyName("address")
-    var address: String
+    var address: String,
+    var phone: String
 ) {
     constructor() : this(
         name = "",
@@ -26,6 +27,7 @@ data class RemoteRestaurant(
         description = "",
         interiorPhotos = mutableListOf(),
         workingHours = "",
-        address = ""
+        address = "",
+        phone = ""
     )
 }

@@ -1,14 +1,19 @@
 package itis.ru.paper.ui.restaurant_menu
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.stfalcon.imageviewer.StfalconImageViewer
 import itis.ru.paper.R
 import itis.ru.paper.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_restaurant_about.*
+
 
 class AboutRestarauntFragment : BaseFragment() {
     val args: AboutRestarauntFragmentArgs by navArgs()
@@ -28,6 +33,15 @@ class AboutRestarauntFragment : BaseFragment() {
         initInteriorRecycler()
         initMenuCategoryAdapter()
         setRestaurantInfo()
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        fab_add.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL)
+            intent.data = Uri.parse("tel:${args.phone}")
+            startActivity(intent)
+        }
     }
 
     private fun setRestaurantInfo() {
@@ -36,13 +50,18 @@ class AboutRestarauntFragment : BaseFragment() {
     }
 
     private fun initInteriorRecycler() {
-        interiorAdapter = InteriorAdapter {
-
-        }
+        interiorAdapter = InteriorAdapter(list = mutableListOf(), clickListener = {
+            StfalconImageViewer.Builder<String>(
+                context,
+                interiorAdapter.list
+            ) { view, image ->
+                Glide.with(context!!).load(image).into(view)
+            }.show()
+        })
         rv_restaurant_photos.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv_restaurant_photos.adapter = interiorAdapter
-        interiorAdapter.submitList(args.interiorPhotos.toList())
+        interiorAdapter.submitList(args.interiorPhotos.toMutableList())
     }
 
     private fun initMenuCategoryAdapter() {

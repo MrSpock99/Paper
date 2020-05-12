@@ -3,11 +3,11 @@ package itis.ru.paper.interactor
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import itis.ru.paper.model.LocalMenuCategory
-import itis.ru.paper.model.Restaurant
+import itis.ru.paper.model.LocalRestaurant
 import itis.ru.paper.repository.RestaurantRepository
 
 class RestaurantInteractor(private val repository: RestaurantRepository) {
-    fun getRestaurantList(): Observable<MutableList<Restaurant>> {
+    fun getRestaurantList(): Observable<MutableList<LocalRestaurant>> {
         return repository.getRestaurantList()
             .subscribeOn(Schedulers.io())
             .flatMap {
@@ -22,14 +22,15 @@ class RestaurantInteractor(private val repository: RestaurantRepository) {
                                 )
                             )
                         }
-                        Restaurant(
+                        LocalRestaurant(
                             it.name,
                             localMenuCategoryList,
                             it.photoUrl,
                             it.description,
                             it.interiorPhotos,
                             it.workingHours,
-                            it.address
+                            it.address,
+                            it.phone
                         )
                     }
                     .toList()
